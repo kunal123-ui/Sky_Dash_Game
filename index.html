@@ -3,94 +3,211 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#78d8ff">
-<title>SKY DASH 3D</title>
-<link rel="stylesheet" href="css/style.css">
+<meta name="theme-color" content="#72dfff">
+<title>SKY DASH 3D — Complete</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#eaf9ff;color:#10284a}body{overflow-x:hidden}
+:root{--p:#7655ff;--c:#20cfff;--pink:#ff6fae;--yellow:#ffd23f;--glass:#ffffffa8}
+button,input,select{font:inherit}button{border:0;cursor:pointer;color:inherit}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 75% 8%,#fff7b5 0,transparent 25%),linear-gradient(145deg,#b9efff,#d9caff 48%,#ffe2ee)}
+.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,#ffffff66,transparent 65%);animation:sheen 10s linear infinite}@keyframes sheen{to{transform:translateX(35%)}}
+.topbar{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;position:sticky;top:0;z-index:30;background:#ffffff80;backdrop-filter:blur(18px);border-bottom:1px solid #fff}
+.brand{background:none;font-weight:1000;letter-spacing:.06em;display:flex;gap:10px;align-items:center;font-size:17px}.brand b{color:var(--p)}.brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--c));color:#fff;box-shadow:0 8px 20px #7655ff55}.top-stats{display:flex;gap:18px;font-size:13px}.icon-btn,.pause{width:42px;height:42px;border-radius:14px;background:#ffffffc9;box-shadow:0 8px 24px #4666a122}
+.page{display:none;max-width:1400px;margin:auto;padding:34px 4vw 105px;min-height:calc(100vh - 70px)}.page.active{display:block}.glass{background:#ffffff8c;border:1px solid #ffffffcc;box-shadow:0 25px 70px #374b8c20;backdrop-filter:blur(18px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;min-height:510px}.hero-copy{border-radius:34px;padding:clamp(28px,5vw,65px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;position:relative}.eyebrow{font-size:10px;font-weight:1000;letter-spacing:.18em;color:#7557d8}.hero-copy h1{font-size:clamp(48px,7vw,92px);line-height:.88;margin:18px 0;letter-spacing:-.06em}.hero-copy h1 em{font-style:normal;color:var(--p);text-shadow:4px 6px #fff}.hero-copy p{max-width:610px;font-size:16px;line-height:1.7;color:#49617c}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.primary,.secondary,.danger{padding:13px 18px;border-radius:15px;font-weight:950;transition:.18s}.primary{background:linear-gradient(135deg,var(--p),var(--c));color:#fff;box-shadow:0 12px 30px #7755ff44}.primary:hover,.secondary:hover{transform:translateY(-2px)}.secondary{background:#ffffffb8;border:1px solid #fff}.primary.huge{font-size:16px;padding:17px 24px}.danger{background:#ffedf0;color:#c73758}.mini-chips{display:flex;gap:7px;flex-wrap:wrap}.mini-chips span,.badge{padding:6px 9px;border-radius:99px;background:#ede8ff;color:#6648d6;font-size:9px;font-weight:950}
+.hero-art{position:relative;border-radius:34px;overflow:hidden;background:linear-gradient(180deg,#73dfff,#b2d7ff 52%,#8c75ff);min-height:510px;box-shadow:0 30px 70px #5267b833}.sun{position:absolute;width:180px;height:180px;border-radius:50%;background:#fff4a2;right:15%;top:10%;box-shadow:0 0 90px #fff1a8}.cloud{position:absolute;width:180px;height:45px;background:#fff9;border-radius:50px}.c1{top:24%;left:5%}.c2{top:38%;right:-5%;transform:scale(.7)}.platform{position:absolute;left:-10%;right:-10%;height:42%;bottom:-18%;background:linear-gradient(160deg,#4a40aa,#24245f);transform:perspective(500px) rotateX(45deg)}.platform:after{content:"";position:absolute;inset:15%;border:3px solid #62e9ff55;transform:skewX(-20deg)}
+.runner-figure{position:absolute;left:50%;bottom:25%;width:125px;height:280px;transform:translateX(-50%);filter:drop-shadow(0 18px 12px #15135a66);animation:runBob .55s ease-in-out infinite alternate}.head{position:absolute;top:5px;left:40px;width:55px;height:62px;border-radius:45%;background:linear-gradient(135deg,#ffd2ae,#d98d67);z-index:4}.head:before{content:"";position:absolute;left:-4px;top:-8px;width:62px;height:35px;border-radius:55% 55% 30% 20%;background:#3b2a5e}.head i,.head b{position:absolute;width:7px;height:7px;border-radius:50%;background:#26314b;top:29px}.head i{left:14px}.head b{right:14px}.torso{position:absolute;top:65px;left:31px;width:65px;height:95px;border-radius:25px 25px 16px 16px;background:linear-gradient(135deg,#7c55ff,#21c9e8);border:4px solid #fff6}.arm,.leg{position:absolute;border-radius:30px;background:linear-gradient(180deg,#ffd0ac,#e18e69);transform-origin:top}.arm{width:18px;height:85px;top:72px}.a1{left:25px;transform:rotate(24deg)}.a2{right:16px;transform:rotate(-30deg)}.leg{width:22px;height:105px;top:145px}.l1{left:39px;transform:rotate(8deg)}.l2{right:37px;transform:rotate(-15deg)}.shoe{position:absolute;bottom:17px;width:45px;height:18px;border-radius:20px 25px 10px 10px;background:#17254d}.s1{left:20px}.s2{right:17px}@keyframes runBob{to{transform:translateX(-50%) translateY(-8px)}}
+.dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:18px}.stat-card{padding:19px;border-radius:21px;background:#ffffffa8;box-shadow:0 15px 40px #5369a118}.stat-card small{display:block;font-size:9px;font-weight:950;color:#6d7e98}.stat-card strong{display:block;font-size:26px;margin:6px 0}.stat-card span{font-size:10px;color:#778aa4}.daily{grid-column:1/-1;border-radius:22px;padding:17px 21px;display:flex;justify-content:space-between;align-items:center}.daily h3{margin:5px 0;font-size:17px}.daily p{margin:0;color:#6b7e96;font-size:11px}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px;gap:15px}.section-head h2{font-size:40px;margin:5px 0;letter-spacing:-.04em}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:17px}.card{border-radius:24px;padding:20px;background:#ffffffad;border:1px solid #fff;box-shadow:0 18px 45px #4e5f9b18;position:relative;overflow:hidden}.card h3{margin:7px 0;font-size:21px}.card p{color:#657995;font-size:12px;line-height:1.5}.portrait{height:190px;border-radius:19px;background:linear-gradient(145deg,#a6efff,#8d79ff);position:relative;overflow:hidden}.portrait .runner-figure{bottom:0;transform:translateX(-50%) scale(.67)}.selected{box-shadow:0 0 0 3px #7655ff55,0 20px 50px #7655ff20}.meter{height:8px;background:#e2e9f4;border-radius:99px;overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--c));border-radius:99px}.list-grid{display:grid;gap:12px}.mission,.achievement{padding:18px;border-radius:20px;background:#ffffffad;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.mission h3,.achievement h3{margin:0 0 5px}.mission p,.achievement p{margin:0;color:#71829a;font-size:11px}.mission .meter{grid-column:1/-1}.wallet{padding:11px 15px;background:#ffffff99;border-radius:13px}.leaderboard{border-radius:24px;padding:9px;overflow:hidden}.row{display:grid;grid-template-columns:50px 1fr 1fr 1fr;gap:10px;padding:16px;border-radius:15px;align-items:center}.row.me{background:#e9e2ff}.rank{font-weight:950;color:#6e51d9}.muted{color:#7b8ba1;font-size:11px}.tabs{display:flex;background:#ffffff88;border-radius:13px;padding:4px}.tab{padding:8px 11px;background:none;border-radius:9px;font-size:10px;font-weight:950}.tab.active{background:#fff;box-shadow:0 5px 15px #4c5d8b22}.settings-card{max-width:820px;border-radius:26px;padding:24px;display:grid;gap:14px}.setting{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:12px 0;border-bottom:1px solid #ffffffaa}.setting label{font-weight:850}.setting small{display:block;color:#7b8ca2;font-weight:400;margin-top:3px}.setting input,.setting select{border:1px solid #d8e0ef;border-radius:11px;padding:10px 12px;background:#fff;min-width:165px}.toggle{width:52px;height:29px;border-radius:99px;background:#c8d3e4;padding:3px}.toggle i{display:block;width:23px;height:23px;border-radius:50%;background:#fff;transition:.2s}.toggle.on{background:#7355ef}.toggle.on i{transform:translateX(23px)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#ffffffe8;backdrop-filter:blur(20px);border-top:1px solid #fff;display:flex;justify-content:center;gap:3px;z-index:40}.bottom-nav button{min-width:80px;background:none;font-size:17px;font-weight:900;color:#63758e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.bottom-nav button span{font-size:8px}.bottom-nav button:hover{color:#7554e8}
+.game-page{padding:0;max-width:none;min-height:calc(100vh - 70px)}.game-wrap{position:relative;width:100%;height:calc(100vh - 70px);min-height:550px;overflow:hidden;background:#70dfff}.game-wrap canvas{width:100%;height:100%;display:block}.hud{position:absolute;top:15px;left:15px;right:15px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}.hud-left,.hud-right{display:flex;gap:7px;align-items:flex-start}.hud-pill{padding:8px 12px;border-radius:13px;background:#ffffffc9;backdrop-filter:blur(10px);box-shadow:0 8px 24px #254a7720;min-width:78px}.hud-pill small{display:block;font-size:7px;font-weight:950;color:#73839b}.hud-pill b{font-size:13px}.hud-center{text-align:center}.event-pill{display:inline-block;padding:6px 13px;border-radius:99px;background:#fff;color:#7653df;font-weight:950;font-size:10px}.combo{font-size:26px;font-weight:1000;color:#fff;text-shadow:0 3px 12px #182a6677}.pause{pointer-events:auto;font-size:16px}.power-bar{position:absolute;left:50%;transform:translateX(-50%);top:77px;height:8px;width:min(320px,55vw);border-radius:99px;background:#ffffff55;overflow:hidden}.power-bar:before{content:"";display:block;width:var(--power,0%);height:100%;background:linear-gradient(90deg,#ffdc43,#ff6ab8);border-radius:99px}.game-overlay{position:absolute;inset:0;background:#16245a55;display:grid;place-items:center;backdrop-filter:blur(5px)}.game-overlay.hidden{display:none}.overlay-card{width:min(500px,90vw);padding:30px;border-radius:28px;text-align:center}.overlay-card h2{font-size:40px;margin:0 0 9px}.results{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:18px 0}.result{background:#fff8;border-radius:13px;padding:9px}.result b{display:block;font-size:18px}.mobile-controls{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:none;gap:7px}.mobile-controls button{width:53px;height:53px;border-radius:17px;background:#ffffffba;backdrop-filter:blur(8px);font-size:21px;font-weight:950}.mobile-controls button:last-child{background:#ffcf45}#toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%) translateY(18px);padding:11px 17px;border-radius:99px;background:#16284e;color:#fff;font-weight:850;font-size:11px;opacity:0;transition:.22s;z-index:60;pointer-events:none}#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-art{min-height:380px}.dashboard-grid{grid-template-columns:repeat(2,1fr)}.daily{grid-column:1/-1}.bottom-nav button{min-width:58px}.section-head h2{font-size:31px}}
+@media(max-width:650px){.topbar{height:62px;padding:0 13px}.page{padding:20px 13px 94px}.hero-copy{padding:27px;border-radius:24px}.hero-copy h1{font-size:47px}.hero-art{min-height:350px;border-radius:24px}.stat-card{padding:14px}.stat-card strong{font-size:21px}.bottom-nav{height:64px;justify-content:space-around}.bottom-nav button{min-width:0;flex:1;font-size:15px}.bottom-nav button span{font-size:7px}.hud{top:8px;left:8px;right:8px}.hud-pill{min-width:auto;padding:7px 8px}.hud-right .hud-pill:nth-child(2){display:none}.mobile-controls{display:flex}.game-wrap{min-height:100svh;height:calc(100svh - 62px)}.game-page{min-height:calc(100svh - 62px)}.row{grid-template-columns:34px 1fr auto}.row span:nth-last-child(2){display:none}.setting{align-items:flex-start}.setting input,.setting select{min-width:125px}.portrait{height:175px}.results{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
 </head>
 <body>
-<div id="app">
-  <div id="bg" class="bg"></div>
-  <header class="topbar">
-    <button class="brand" data-page="home" aria-label="Sky Dash home"><span class="brand-mark">✦</span><span>SKY DASH <b>3D</b></span></button>
-    <div class="top-stats">
-      <span>🪙 <b id="topCoins">0</b></span><span>XP <b id="topLevel">1</b></span>
-    </div>
-    <button id="settingsTop" class="icon-btn" aria-label="Settings">⚙</button>
-  </header>
+<div id="bg" class="bg"></div>
+<header class="topbar">
+<button class="brand" data-page="home"><span class="brand-mark">✦</span> SKY DASH <b>3D</b></button>
+<div class="top-stats">🪙 <b id="topCoins">0</b> &nbsp; LEVEL <b id="topLevel">1</b></div>
+<button class="icon-btn" id="settingsTop" aria-label="Settings">⚙</button>
+</header>
 
-  <main>
-    <section id="page-home" class="page active">
-      <div class="hero-grid">
-        <div class="hero-copy glass">
-          <span class="eyebrow">FUTURE RUNNER • SEASON 01</span>
-          <h1>CHASE THE<br><em>HORIZON.</em></h1>
-          <p>Dash through floating cities, dodge rogue drones, collect sky energy and become the ultimate runner.</p>
-          <div class="hero-actions">
-            <button class="primary huge" id="playHome">PLAY NOW <span>→</span></button>
-            <button class="secondary" data-page="heroes">HEROES</button>
-          </div>
-          <div class="mini-chips"><span>3 LANES</span><span>∞ DISTANCE</span><span>60 FPS</span></div>
-        </div>
-        <div class="hero-art">
-          <div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
-          <div class="platform"></div>
-          <div class="runner-figure"><div class="backpack"></div><div class="head"><i></i><b></b></div><div class="torso"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div><div class="shoe s1"></div><div class="shoe s2"></div></div>
-          <div class="speed-lines"></div>
-        </div>
-      </div>
-      <div class="dashboard-grid">
-        <div class="stat-card"><small>BEST SCORE</small><strong id="homeBest">0</strong><span>your peak</span></div>
-        <div class="stat-card"><small>TOTAL DISTANCE</small><strong id="homeDistance">0m</strong><span>all runs</span></div>
-        <div class="stat-card"><small>TOTAL COINS</small><strong id="homeCoins">0</strong><span>banked</span></div>
-        <div class="stat-card"><small>TOTAL RUNS</small><strong id="homeRuns">0</strong><span>attempts</span></div>
-        <div class="daily glass"><div><span class="eyebrow">DAILY CHALLENGE</span><h3 id="dailyTitle">RUN 3000 METERS</h3><p id="dailyProgress">0 / 3000m</p></div><button id="dailyBtn" class="secondary">VIEW</button></div>
-      </div>
-    </section>
-
-    <section id="page-game" class="page game-page">
-      <div class="game-wrap">
-        <canvas id="gameCanvas" aria-label="Sky Dash 3D game"></canvas>
-        <div class="hud">
-          <div class="hud-left"><div class="hud-pill"><small>SCORE</small><b id="hudScore">0</b></div><div class="hud-pill"><small>DISTANCE</small><b id="hudDistance">0m</b></div></div>
-          <div class="hud-center"><div id="hudEvent" class="event-pill">RUN!</div><div id="combo" class="combo">x1</div></div>
-          <div class="hud-right"><div class="hud-pill"><small>COINS</small><b>🪙 <span id="hudCoins">0</span></b></div><div class="hud-pill"><small>BEST</small><b id="hudBest">0</b></div><button id="pauseBtn" class="pause">Ⅱ</button></div>
-          <div id="powerBar" class="power-bar"></div>
-        </div>
-        <div id="gameOverlay" class="game-overlay hidden">
-          <div class="overlay-card glass" id="overlayCard"></div>
-        </div>
-        <div class="mobile-controls">
-          <button data-control="left">←</button><button data-control="jump">↑</button><button data-control="slide">↓</button><button data-control="right">→</button><button data-control="boost">⚡</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="page-heroes" class="page">
-      <div class="section-head"><div><span class="eyebrow">ROSTER</span><h2>Choose your runner</h2></div><button class="secondary" data-page="home">HOME</button></div>
-      <div id="heroesGrid" class="card-grid"></div>
-    </section>
-    <section id="page-garage" class="page"><div class="section-head"><div><span class="eyebrow">CUSTOMIZE</span><h2>Garage</h2></div></div><div id="garageContent"></div></section>
-    <section id="page-worlds" class="page"><div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Worlds</h2></div></div><div id="worldsGrid" class="card-grid"></div></section>
-    <section id="page-missions" class="page"><div class="section-head"><div><span class="eyebrow">OBJECTIVES</span><h2>Missions</h2></div></div><div id="missionsGrid" class="list-grid"></div></section>
-    <section id="page-shop" class="page"><div class="section-head"><div><span class="eyebrow">MARKET</span><h2>Shop</h2></div><div class="wallet">🪙 <b id="shopCoins">0</b></div></div><div id="shopGrid" class="card-grid"></div></section>
-    <section id="page-upgrades" class="page"><div class="section-head"><div><span class="eyebrow">POWER LAB</span><h2>Upgrades</h2></div></div><div id="upgradesGrid" class="card-grid"></div></section>
-    <section id="page-achievements" class="page"><div class="section-head"><div><span class="eyebrow">TROPHIES</span><h2>Achievements</h2></div></div><div id="achievementsGrid" class="list-grid"></div></section>
-    <section id="page-leaderboard" class="page"><div class="section-head"><div><span class="eyebrow">RANKED</span><h2>Leaderboard</h2></div><div class="tabs"><button class="tab active" data-board="score">SCORE</button><button class="tab" data-board="distance">DISTANCE</button><button class="tab" data-board="coins">COINS</button></div></div><div id="leaderboard" class="leaderboard glass"></div></section>
-    <section id="page-settings" class="page"><div class="section-head"><div><span class="eyebrow">CONTROL CENTER</span><h2>Settings</h2></div></div><div class="settings-card glass" id="settingsPanel"></div></section>
-  </main>
-
-  <nav class="bottom-nav">
-    <button data-page="home">⌂<span>Home</span></button><button data-page="heroes">♙<span>Heroes</span></button><button data-page="worlds">☁<span>Worlds</span></button><button data-page="shop">✦<span>Shop</span></button><button data-page="missions">✓<span>Missions</span></button><button data-page="leaderboard">♛<span>Ranks</span></button>
-  </nav>
-  <div id="toast"></div>
+<main>
+<section id="page-home" class="page active">
+<div class="hero-grid">
+<div class="hero-copy glass"><span class="eyebrow">FUTURE RUNNER • SEASON 01</span><h1>CHASE THE<br><em>HORIZON.</em></h1><p>Dash through floating cities, dodge rogue drones, collect sky energy and become the ultimate runner.</p><div class="hero-actions"><button class="primary huge" id="playHome">PLAY NOW →</button><button class="secondary" data-page="heroes">HEROES</button></div><div class="mini-chips"><span>3 LANES</span><span>∞ DISTANCE</span><span>60 FPS</span></div></div>
+<div class="hero-art"><div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="platform"></div><div class="runner-figure"><div class="backpack"></div><div class="head"><i></i><b></b></div><div class="torso"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div><div class="shoe s1"></div><div class="shoe s2"></div></div></div>
 </div>
-<script src="js/storage.js"></script>
-<script src="js/effects.js"></script>
-<script src="js/player.js"></script>
-<script src="js/enemies.js"></script>
-<script src="js/world.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/game.js"></script>
-<script src="js/app.js"></script>
+<div class="dashboard-grid">
+<div class="stat-card"><small>BEST SCORE</small><strong id="homeBest">0</strong><span>your peak</span></div><div class="stat-card"><small>TOTAL DISTANCE</small><strong id="homeDistance">0m</strong><span>all runs</span></div><div class="stat-card"><small>BANKED COINS</small><strong id="homeCoins">0</strong><span>currency</span></div><div class="stat-card"><small>TOTAL RUNS</small><strong id="homeRuns">0</strong><span>attempts</span></div>
+<div class="daily glass"><div><span class="eyebrow">DAILY CHALLENGE</span><h3>RUN 3000 METERS</h3><p id="dailyProgress">0 / 3000m</p></div><button class="secondary" id="dailyBtn">VIEW</button></div>
+</div>
+</section>
+
+<section id="page-game" class="page game-page">
+<div class="game-wrap"><canvas id="gameCanvas"></canvas>
+<div class="hud"><div class="hud-left"><div class="hud-pill"><small>SCORE</small><b id="hudScore">0</b></div><div class="hud-pill"><small>DISTANCE</small><b id="hudDistance">0m</b></div></div><div class="hud-center"><div id="hudEvent" class="event-pill">RUN!</div><div id="combo" class="combo">x1</div></div><div class="hud-right"><div class="hud-pill"><small>COINS</small><b>🪙 <span id="hudCoins">0</span></b></div><div class="hud-pill"><small>BEST</small><b id="hudBest">0</b></div><button id="pauseBtn" class="pause">Ⅱ</button></div><div id="powerBar" class="power-bar"></div></div>
+<div id="gameOverlay" class="game-overlay hidden"><div class="overlay-card glass" id="overlayCard"></div></div>
+<div class="mobile-controls"><button data-control="left">←</button><button data-control="jump">↑</button><button data-control="slide">↓</button><button data-control="right">→</button><button data-control="boost">⚡</button></div>
+</div></section>
+
+<section id="page-heroes" class="page"><div class="section-head"><div><span class="eyebrow">ROSTER</span><h2>Choose your runner</h2></div><button class="secondary" data-page="home">HOME</button></div><div id="heroesGrid" class="card-grid"></div></section>
+<section id="page-garage" class="page"><div class="section-head"><div><span class="eyebrow">CUSTOMIZE</span><h2>Garage</h2></div></div><div id="garageContent"></div></section>
+<section id="page-worlds" class="page"><div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Worlds</h2></div></div><div id="worldsGrid" class="card-grid"></div></section>
+<section id="page-missions" class="page"><div class="section-head"><div><span class="eyebrow">OBJECTIVES</span><h2>Missions</h2></div></div><div id="missionsGrid" class="list-grid"></div></section>
+<section id="page-shop" class="page"><div class="section-head"><div><span class="eyebrow">MARKET</span><h2>Shop</h2></div><div class="wallet">🪙 <b id="shopCoins">0</b></div></div><div id="shopGrid" class="card-grid"></div></section>
+<section id="page-upgrades" class="page"><div class="section-head"><div><span class="eyebrow">POWER LAB</span><h2>Upgrades</h2></div></div><div id="upgradesGrid" class="card-grid"></div></section>
+<section id="page-achievements" class="page"><div class="section-head"><div><span class="eyebrow">TROPHIES</span><h2>Achievements</h2></div></div><div id="achievementsGrid" class="list-grid"></div></section>
+<section id="page-leaderboard" class="page"><div class="section-head"><div><span class="eyebrow">RANKED</span><h2>Leaderboard</h2></div><div class="tabs"><button class="tab active" data-board="score">SCORE</button><button class="tab" data-board="distance">DISTANCE</button><button class="tab" data-board="coins">COINS</button></div></div><div id="leaderboard" class="leaderboard glass"></div></section>
+<section id="page-settings" class="page"><div class="section-head"><div><span class="eyebrow">CONTROL CENTER</span><h2>Settings</h2></div></div><div class="settings-card" id="settingsPanel"></div></section>
+</main>
+
+<nav class="bottom-nav"><button data-page="home">⌂<span>Home</span></button><button data-page="heroes">♙<span>Heroes</span></button><button data-page="worlds">☁<span>Worlds</span></button><button data-page="shop">✦<span>Shop</span></button><button data-page="missions">✓<span>Missions</span></button><button data-page="leaderboard">♛<span>Ranks</span></button></nav>
+<div id="toast"></div>
+
+<script>
+"use strict";
+
+/* ---------- DATA ---------- */
+const HEROES={
+ Kai:{speed:9,jump:8,power:7,ability:"Dash Step",color:"#7454ff",price:0,tag:"Balanced"},
+ Lena:{speed:7,jump:10,power:8,ability:"Sky Leap",color:"#ff63a8",price:600,tag:"Double Jump"},
+ Max:{speed:8,jump:7,power:10,ability:"Iron Guard",color:"#ff9c3b",price:800,tag:"Shield Master"},
+ Zara:{speed:9,jump:9,power:9,ability:"Coin Surge",color:"#24cfa9",price:1200,tag:"Elite"},
+ Nova:{speed:10,jump:8,power:8,ability:"Phase Dash",color:"#2bc8ff",price:1600,tag:"Speedster"},
+ Aria:{speed:8,jump:10,power:10,ability:"Star Jump",color:"#a866ff",price:2000,tag:"Sky Legend"}
+};
+const SKINS=[["Sky",0],["Sun",350],["Mint",500],["Violet",750],["Gold",1200],["Cyber",1600],["Shadow",2200]];
+const TRAILS=[["Spark",0],["Rainbow",500],["Fire",700],["Star",900],["Cloud",1100],["Lightning",1500]];
+const WORLDS=[
+ {name:"Sky City",unlock:0,sky:["#65dcff","#d9f6ff"],accent:"#7252ee",icon:"🏙️",desc:"Floating towers above the cloudline."},
+ {name:"Sunset Coast",unlock:1500,sky:["#ff9b70","#ffd66b"],accent:"#ff6b75",icon:"🌅",desc:"A radiant ocean highway."},
+ {name:"Neon District",unlock:3500,sky:["#17164e","#3e2d89"],accent:"#29e7ff",icon:"🌃",desc:"Electric streets and cyber skies."},
+ {name:"Cloud Temple",unlock:7000,sky:["#bba9ff","#fff1fa"],accent:"#ff7ccf",icon:"☁️",desc:"Ancient sky ruins in a dreamscape."},
+ {name:"Sky Summit",unlock:12000,sky:["#17284c","#7cbdff"],accent:"#8ff4ff",icon:"⛰️",desc:"The extreme altitude challenge."}
+];
+const MISSIONS=[
+ ["Collect 100 coins",100,100,"coins"],["Run 2000 meters",2000,200,"distance"],["Avoid 25 obstacles",25,180,"obstacles"],
+ ["Use 3 powerups",3,160,"powerups"],["Reach x10 combo",10,250,"combo"],["Complete 3 runs",3,220,"runs"],["Collect 10 gems",10,300,"gems"]
+];
+const ACH=[
+ ["First Run","Complete your first run",50],["First 100 Coins","Collect 100 coins",100],["1000 Meter Runner","Run 1000 meters",150],
+ ["5000 Meter Runner","Run 5000 meters",300],["Combo Master","Reach x10 combo",250],["Power User","Use a powerup",120],
+ ["Coin Collector","Collect 1000 total coins",350],["World Traveler","Unlock 3 worlds",500],["Million Point Runner","Score 1,000,000 points",1000],
+ ["Perfect Run","Reach 500m without collision",300],["Skin Collector","Own 5 skins",400],["Upgrade Master","Max one upgrade",500],
+ ["Long Distance","Run 10000m",600],["Obstacle Dodger","Avoid 100 obstacles",500],["Legend Runner","Reach level 10",1000]
+];
+const POWERUPS=["SHIELD","MAGNET","BOOST","DOUBLE","SUPER","MULTI","INVINCIBILITY"];
+const OBSTACLES=["barrier","crate","gate","drone","rock","laser","spikes"];
+
+/* ---------- STORAGE ---------- */
+const DEFAULT={
+ name:"Sky Runner",coins:1000,bestScore:0,totalDistance:0,totalRuns:0,level:1,xp:0,
+ selectedHero:"Kai",selectedSkin:"Sky",selectedTrail:"Spark",selectedWorld:"Sky City",
+ ownedHeroes:["Kai"],ownedSkins:["Sky"],ownedTrails:["Spark"],upgrades:{Speed:0,Jump:0,Magnet:0,Shield:0,"Coin Bonus":0,"Score Multiplier":0},
+ missions:{},achievements:{},stats:{coins:0,gems:0,obstacles:0,powerups:0,nearMisses:0},daily:{date:"",progress:0,claimed:false},
+ settings:{difficulty:"Normal",theme:"SKY",sound:true,music:true,shake:true,touch:true,reduced:false}
+};
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function merge(a,b){for(const k in b){if(b[k]&&typeof b[k]==="object"&&!Array.isArray(b[k])&&a[k])a[k]=merge(a[k],b[k]);else a[k]=b[k]}return a}
+function load(){try{const x=localStorage.getItem("skyDash3D");return x?merge(clone(DEFAULT),JSON.parse(x)):clone(DEFAULT)}catch(e){localStorage.removeItem("skyDash3D");return clone(DEFAULT)}}
+let S=load();
+function save(){try{localStorage.setItem("skyDash3D",JSON.stringify(S))}catch(e){}}
+function xpAdd(n){S.xp+=Math.max(0,Math.floor(n));let need=S.level*1000,up=false;while(S.xp>=need){S.xp-=need;S.level++;need=S.level*1000;up=true}if(up){toast("LEVEL UP! • LEVEL "+S.level);beep(880,.14)}save()}
+
+/* ---------- UTIL ---------- */
+const $=id=>document.getElementById(id);
+function toast(t){const x=$("toast");x.textContent=t;x.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove("show"),1700)}
+let audio=null;
+function beep(f=500,d=.07,type="sine"){if(!S.settings.sound)return;try{audio??=new (window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.045,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+d)}catch(e){}}
+class Particles{
+ constructor(){this.a=[]}
+ burst(x,y,n=12,type="spark"){if(S.settings.reduced)n=Math.ceil(n*.35);for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=30+Math.random()*140;this.a.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:.5+Math.random()*.5,max:1,size:2+Math.random()*5,type})}}
+ update(dt){for(const p of this.a){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=90*dt;p.life-=dt}this.a=this.a.filter(p=>p.life>0).slice(-350)}
+ draw(c){for(const p of this.a){c.globalAlpha=Math.max(0,p.life/p.max);c.fillStyle=p.type==="coin"?"#ffd43b":p.type==="hit"?"#ff5d7a":"#fff";c.beginPath();c.arc(p.x,p.y,p.size,0,Math.PI*2);c.fill()}c.globalAlpha=1}
+}
+const particles=new Particles();
+
+/* ---------- UI ---------- */
+function showPage(name){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+name));if(name!=="game"&&game.running)game.stop();window.scrollTo(0,0);if(name==="game")game.start()}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-page]");if(b)showPage(b.dataset.page)});
+$("playHome").onclick=()=>showPage("game");$("settingsTop").onclick=()=>showPage("settings");$("dailyBtn").onclick=()=>toast("Daily: reach 3000m • reward 500 coins");
+function applyTheme(){const b=$("bg");b.style.background=S.settings.theme==="SUNSET"?"linear-gradient(145deg,#ffd19a,#ffb0c7 45%,#b9a4ff)":S.settings.theme==="MINT"?"linear-gradient(145deg,#baf8e4,#b9ecff 45%,#e0d0ff)":"radial-gradient(circle at 75% 8%,#fff7b5 0,transparent 25%),linear-gradient(145deg,#b9efff,#d9caff 48%,#ffe2ee)"}
+function heroCard(name,h){const selected=S.selectedHero===name,owned=S.ownedHeroes.includes(name);return `<article class="card ${selected?"selected":""}"><div class="portrait" style="background:linear-gradient(145deg,${h.color}66,#8d79ff)"><div class="runner-figure" style="filter:hue-rotate(${name==="Lena"?30:name==="Max"?100:name==="Zara"?180:name==="Nova"?250:name==="Aria"?300:0}deg)"><div class="head"><i></i><b></b></div><div class="torso"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div><div class="shoe s1"></div><div class="shoe s2"></div></div></div><span class="badge">${h.tag}</span><h3>${name} ${selected?"✓":""}</h3><p>⚡ Speed ${h.speed} • 🦘 Jump ${h.jump} • 💥 Power ${h.power}<br>Ability: <b>${h.ability}</b></p><button class="${owned?"primary":"secondary"}" onclick="selectHero('${name}')">${owned?(selected?"SELECTED":"SELECT"):"🪙 "+h.price+" UNLOCK"}</button></article>`}
+function renderHeroes(){$("heroesGrid").innerHTML=Object.entries(HEROES).map(([n,h])=>heroCard(n,h)).join("")}
+function selectHero(n){const h=HEROES[n];if(!S.ownedHeroes.includes(n)){if(S.coins<h.price)return toast("Not enough coins");S.coins-=h.price;S.ownedHeroes.push(n)}S.selectedHero=n;save();renderAll();toast(n+" selected");beep(520,.08)}
+function renderGarage(){$("garageContent").innerHTML=`<div class="card-grid"><div class="card"><span class="eyebrow">SKINS</span><h3>${S.selectedSkin}</h3><p>Selected: ${S.selectedSkin}</p><div class="mini-chips">${SKINS.map(x=>`<button class="secondary" onclick="selectSkin('${x[0]}')">${x[0]} ${S.ownedSkins.includes(x[0])?"✓":"🪙"+x[1]}</button>`).join("")}</div></div><div class="card"><span class="eyebrow">TRAILS</span><h3>${S.selectedTrail}</h3><p>Selected: ${S.selectedTrail}</p><div class="mini-chips">${TRAILS.map(x=>`<button class="secondary" onclick="selectTrail('${x[0]}')">${x[0]} ${S.ownedTrails.includes(x[0])?"✓":"🪙"+x[1]}</button>`).join("")}</div></div></div>`}
+function selectSkin(n){const x=SKINS.find(a=>a[0]===n);if(!S.ownedSkins.includes(n)){if(S.coins<x[1])return toast("Not enough coins");S.coins-=x[1];S.ownedSkins.push(n)}S.selectedSkin=n;save();renderAll()}
+function selectTrail(n){const x=TRAILS.find(a=>a[0]===n);if(!S.ownedTrails.includes(n)){if(S.coins<x[1])return toast("Not enough coins");S.coins-=x[1];S.ownedTrails.push(n)}S.selectedTrail=n;save();renderAll()}
+function renderWorlds(){$("worldsGrid").innerHTML=WORLDS.map(w=>{const ok=S.totalDistance>=w.unlock;return `<article class="card ${ok?"":"locked"}"><div class="portrait" style="background:linear-gradient(150deg,${w.sky[0]},${w.sky[1]});display:grid;place-items:center;font-size:64px">${w.icon}</div><span class="badge">${ok?"UNLOCKED":"🔒 "+w.unlock+"m"}</span><h3>${w.name}</h3><p>${w.desc}</p><button class="${ok?"primary":"secondary"}" onclick="${ok?`selectWorld('${w.name}')`:`toast('Run more to unlock')`}">${S.selectedWorld===w.name?"ACTIVE":ok?"SELECT":"LOCKED"}</button></article>`}).join("")}
+function selectWorld(n){S.selectedWorld=n;save();renderAll();toast(n+" selected")}
+function mVal(t){return t==="coins"?S.stats.coins:t==="distance"?Math.floor(S.totalDistance):t==="obstacles"?S.stats.obstacles:t==="powerups"?S.stats.powerups:t==="gems"?S.stats.gems:t==="runs"?S.totalRuns:0}
+function renderMissions(){$("missionsGrid").innerHTML=MISSIONS.map((m,i)=>{const v=Math.min(mVal(m[3]),m[1]),done=v>=m[1];return `<article class="mission"><div><h3>${m[0]}</h3><p>Reward: ${m[2]} coins + XP</p></div><strong>${v}/${m[1]}</strong><div class="meter"><i style="width:${v/m[1]*100}%"></i></div><button class="${done&&!S.missions[i]?"primary":"secondary"}" onclick="claimMission(${i})">${S.missions[i]?"CLAIMED":done?"CLAIM":"IN PROGRESS"}</button></article>`}).join("")}
+function claimMission(i){const m=MISSIONS[i];if(S.missions[i])return;if(mVal(m[3])<m[1])return toast("Mission not complete");S.missions[i]=true;S.coins+=m[2];xpAdd(200);save();renderAll();toast("Mission reward claimed!")}
+function renderShop(){const arr=[...SKINS.map(x=>({cat:"SKIN",name:x[0],price:x[1],owned:S.ownedSkins.includes(x[0]),fn:"buySkin"})),...TRAILS.map(x=>({cat:"TRAIL",name:x[0],price:x[1],owned:S.ownedTrails.includes(x[0]),fn:"buyTrail"}))];$("shopGrid").innerHTML=arr.map(x=>`<article class="card"><span class="badge">${x.cat}</span><h3>${x.name}</h3><p>${x.owned?"Unlocked and ready.":"Cosmetic item for your runner."}</p><button class="${x.owned?"secondary":"primary"}" ${x.owned?"disabled":""} onclick="${x.fn}('${x.name}',${x.price})">${x.owned?"OWNED":"🪙 "+x.price}</button></article>`).join("")}
+function buySkin(n,p){if(S.ownedSkins.includes(n))return;if(S.coins<p)return toast("Not enough coins");S.coins-=p;S.ownedSkins.push(n);save();renderAll();toast(n+" unlocked")}
+function buyTrail(n,p){if(S.ownedTrails.includes(n))return;if(S.coins<p)return toast("Not enough coins");S.coins-=p;S.ownedTrails.push(n);save();renderAll();toast(n+" unlocked")}
+const UP=["Speed","Jump","Magnet","Shield","Coin Bonus","Score Multiplier"], COST=[350,700,1200,1800,2500];
+function renderUpgrades(){$("upgradesGrid").innerHTML=UP.map(n=>{const lv=S.upgrades[n],cost=COST[lv];return `<article class="card"><span class="badge">LEVEL ${lv}/5</span><h3>${n}</h3><p>${({Speed:"Increase base run speed.",Jump:"Increase jump height.",Magnet:"Attract coins from wider range.",Shield:"Increase shield duration.","Coin Bonus":"Increase coin rewards.","Score Multiplier":"Increase score rewards."})[n]}</p><div class="meter"><i style="width:${lv*20}%"></i></div><button class="${lv>=5?"secondary":"primary"}" ${lv>=5?"disabled":""} onclick="buyUpgrade('${n}')">${lv>=5?"MAXED":"UPGRADE • 🪙 "+cost}</button></article>`}).join("")}
+function buyUpgrade(n){const lv=S.upgrades[n];if(lv>=5)return;if(S.coins<COST[lv])return toast("Not enough coins");S.coins-=COST[lv];S.upgrades[n]++;save();renderAll();toast(n+" upgraded")}
+function unlockAch(i){if(S.achievements[i])return;S.achievements[i]=true;S.coins+=ACH[i][2];xpAdd(250);toast("🏆 "+ACH[i][0]);beep(900,.13)}
+function checkAchievements(r){const c=[S.totalRuns>=1,S.stats.coins>=100,S.totalDistance>=1000,S.totalDistance>=5000,r.maxCombo>=10,S.stats.powerups>=1,S.stats.coins>=1000,S.totalDistance>=3500,S.bestScore>=1000000,r.distance>=500&&!r.hit,S.ownedSkins.length>=5,Object.values(S.upgrades).some(v=>v>=5),S.totalDistance>=10000,S.stats.obstacles>=100,S.level>=10];c.forEach((v,i)=>v&&unlockAch(i));save()}
+function renderAchievements(){$("achievementsGrid").innerHTML=ACH.map((a,i)=>`<article class="achievement ${S.achievements[i]?"":"locked"}"><div><h3>${S.achievements[i]?"🏆":"🔒"} ${a[0]}</h3><p>${a[1]} • Reward ${a[2]} coins</p></div><strong>${S.achievements[i]?"UNLOCKED":"LOCKED"}</strong></article>`).join("")}
+let boardMode="score";
+function renderLeaderboard(mode=boardMode){boardMode=mode;const rows=[["SkyFox",845000,9200,7800],["CloudKid",720000,8100,6500],["NeonRunner",650000,7400,9100],["DashMaster",590000,6200,5400],["RunnerX",480000,5800,4900],[S.name,S.bestScore,S.totalDistance,S.stats.coins]].sort((a,b)=>mode==="score"?b[1]-a[1]:mode==="distance"?b[2]-a[2]:b[3]-a[3]);$("leaderboard").innerHTML=rows.map((r,i)=>`<div class="row ${r[0]===S.name?"me":""}"><span class="rank">#${i+1}</span><strong>${escapeHTML(r[0])}</strong><span>${Math.floor(r[1]).toLocaleString()}</span><span class="muted">${Math.floor(r[2]).toLocaleString()}m</span></div>`).join("")}
+function escapeHTML(x){return String(x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+document.querySelectorAll("[data-board]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderLeaderboard(b.dataset.board)});
+function renderSettings(){$("settingsPanel").innerHTML=`<div class="setting"><div><label>Player Name</label><small>Shown in local leaderboard</small></div><input id="playerName" value="${escapeHTML(S.name)}"></div><div class="setting"><div><label>Difficulty</label><small>Changes speed and pressure</small></div><select id="difficulty"><option>Easy</option><option>Normal</option><option>Hard</option></select></div><div class="setting"><div><label>Theme</label><small>Changes the dashboard palette</small></div><select id="theme"><option>SKY</option><option>SUNSET</option><option>MINT</option></select></div>${["sound","music","shake","touch","reduced"].map(k=>`<div class="setting"><div><label>${k[0].toUpperCase()+k.slice(1)}</label></div><button class="toggle ${S.settings[k]?"on":""}" data-toggle="${k}"><i></i></button></div>`).join("")}<button class="primary" id="saveSettings">SAVE SETTINGS</button><button class="danger" id="resetProgress">RESET ALL PROGRESS</button>`;$("difficulty").value=S.settings.difficulty;$("theme").value=S.settings.theme;document.querySelectorAll("[data-toggle]").forEach(b=>b.onclick=()=>{const k=b.dataset.toggle;S.settings[k]=!S.settings[k];b.classList.toggle("on",S.settings[k])});$("saveSettings").onclick=()=>{S.name=$("playerName").value.trim()||"Sky Runner";S.settings.difficulty=$("difficulty").value;S.settings.theme=$("theme").value;save();applyTheme();renderAll();toast("Settings saved")};$("resetProgress").onclick=()=>{if(confirm("Reset all Sky Dash progress?")){localStorage.removeItem("skyDash3D");S=load();renderAll();toast("Progress reset")}}}
+function renderAll(){$("topCoins").textContent=S.coins.toLocaleString();$("topLevel").textContent=S.level;$("homeBest").textContent=Math.floor(S.bestScore).toLocaleString();$("homeDistance").textContent=Math.floor(S.totalDistance)+"m";$("homeCoins").textContent=S.coins.toLocaleString();$("homeRuns").textContent=S.totalRuns;$("shopCoins").textContent=S.coins.toLocaleString();const d=new Date().toISOString().slice(0,10);if(S.daily.date!==d){S.daily={date:d,progress:0,claimed:false};save()}$("dailyProgress").textContent=Math.min(3000,Math.floor(S.daily.progress))+" / 3000m";renderHeroes();renderGarage();renderWorlds();renderMissions();renderShop();renderUpgrades();renderAchievements();renderLeaderboard();renderSettings()}
+
+/* ---------- PLAYER ---------- */
+class Player{
+ constructor(canvas){this.canvas=canvas;this.reset()}
+ reset(){this.lane=1;this.target=1;this.y=0;this.vy=0;this.slide=0;this.boost=0;this.inv=0;this.shield=0;this.magnet=0;this.double=0;this.superJump=0;this.t=0;this.state="RUN"}
+ move(d){this.target=Math.max(0,Math.min(2,this.target+d));beep(280,.035)}
+ jump(){if(this.y<=.03&&!this.slide){const h=HEROES[S.selectedHero];this.vy=(7.0+h.jump*.08)*(this.superJump>0?1.25:1);this.state="JUMP";particles.burst(this.x(),this.baseY(),8,"spark");beep(640,.08)}else if(S.selectedHero==="Lena"&&this.y>.1&&this.y<2.5){this.vy=6.5;particles.burst(this.x(),this.baseY()-60,10,"spark");beep(740,.08)}}
+ slideNow(){if(this.y<.25){this.slide=.65;this.state="SLIDE";beep(220,.05)}}
+ boostNow(){this.boost=Math.max(this.boost,3);this.inv=Math.max(this.inv,1.2);beep(900,.1,"square")}
+ update(dt){this.t+=dt;this.lane+=(this.target-this.lane)*Math.min(1,dt*12);if(this.y>0||this.vy>0){this.vy-=19*dt;this.y+=this.vy*dt;if(this.y<=0){this.y=0;this.vy=0;this.state="RUN";particles.burst(this.x(),this.baseY(),7,"spark")}}if(this.slide>0){this.slide-=dt;if(this.slide<=0)this.state="RUN"}for(const k of ["boost","inv","shield","magnet","double","superJump"])if(this[k]>0)this[k]=Math.max(0,this[k]-dt)}
+ x(){return this.canvas.clientWidth*(.5+(this.lane-1)*.18)}
+ baseY(){return this.canvas.clientHeight*.78}
+ draw(c){const x=this.x(),y=this.baseY()-this.y*this.canvas.clientHeight*.06,bob=this.state==="RUN"?Math.sin(this.t*15)*3:0,h=HEROES[S.selectedHero];c.save();c.translate(x,y+bob);if(this.shield>0){c.strokeStyle="#65e9ffcc";c.lineWidth=4;c.beginPath();c.arc(0,-58,47,0,Math.PI*2);c.stroke()}if(this.boost>0){c.fillStyle="#ffdc45";c.globalAlpha=.7;c.beginPath();c.moveTo(-15,20);c.lineTo(-75,34);c.lineTo(-25,0);c.fill();c.globalAlpha=1}c.fillStyle="#17254d";c.beginPath();c.ellipse(0,5,31,7,0,0,Math.PI*2);c.fill();c.fillStyle="#ffd0ad";c.beginPath();c.arc(0,-82,19,0,Math.PI*2);c.fill();c.fillStyle="#39265c";c.beginPath();c.arc(0,-92,20,Math.PI,Math.PI*2);c.fill();c.fillStyle=h.color;c.beginPath();c.roundRect(-22,-63,44,55,13);c.fill();c.fillStyle="#ffd0ad";const sw=Math.sin(this.t*15)*.12;c.save();c.translate(-22,-57);c.rotate(-.35+sw);c.roundRect(-5,0,10,42,6);c.fill();c.restore();c.save();c.translate(22,-57);c.rotate(.35-sw);c.roundRect(-5,0,10,42,6);c.fill();c.restore();c.fillStyle="#26365b";const s=Math.sin(this.t*15)*.35;c.save();c.translate(-10,-8);c.rotate(s);c.roundRect(-6,0,12,48,6);c.fill();c.restore();c.save();c.translate(10,-8);c.rotate(-s);c.roundRect(-6,0,12,48,6);c.fill();c.restore();c.fillStyle="#182448";c.beginPath();c.ellipse(-15,40,18,7,0,0,Math.PI*2);c.ellipse(15,40,18,7,0,0,Math.PI*2);c.fill();c.restore()}
+}
+
+/* ---------- GAME ---------- */
+function obstacle(z){return{type:OBSTACLES[Math.floor(Math.random()*OBSTACLES.length)],lane:Math.floor(Math.random()*3),z,hit:false}}
+function coin(z,lane){return{type:"coin",lane,z,collected:false}}
+function power(z){return{type:"power",power:POWERUPS[Math.floor(Math.random()*POWERUPS.length)],lane:Math.floor(Math.random()*3),collected:false}}
+class Game{
+ constructor(){this.canvas=$("gameCanvas");this.c=this.canvas.getContext("2d");this.player=new Player(this.canvas);this.running=false;this.paused=false;this.over=false;this.last=0;this.d=0;this.score=0;this.runCoins=0;this.combo=1;this.maxCombo=1;this.speed=15;this.spawn=.5;this.coinSpawn=.2;this.powerSpawn=4;this.obs=[];this.coins=[];this.pows=[];this.hit=false;this.reviveUsed=false;this.milestones=new Set();this.eventT=0;this.resize();addEventListener("resize",()=>this.resize());this.bind()}
+ resize(){const r=this.canvas.getBoundingClientRect(),d=devicePixelRatio||1;this.canvas.width=Math.max(1,Math.floor(r.width*d));this.canvas.height=Math.max(1,Math.floor(r.height*d));this.c.setTransform(d,0,0,d,0,0);this.W=r.width;this.H=r.height}
+ bind(){document.addEventListener("keydown",e=>{if(!this.running)return;if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"," ","Shift"].includes(e.key))e.preventDefault();const k=e.key.toLowerCase();if(e.key==="ArrowLeft"||k==="a")this.player.move(-1);else if(e.key==="ArrowRight"||k==="d")this.player.move(1);else if(e.key==="ArrowUp"||k==="w"||e.key===" ")this.player.jump();else if(e.key==="ArrowDown"||k==="s")this.player.slideNow();else if(e.key==="Shift")this.player.boostNow();else if(k==="p")this.togglePause();else if(k==="r")this.start()});document.querySelectorAll("[data-control]").forEach(b=>{const a=b.dataset.control;for(const ev of ["touchstart","mousedown"])b.addEventListener(ev,e=>{e.preventDefault();this.control(a)},{passive:false})});$("pauseBtn").onclick=()=>this.togglePause()}
+ control(a){if(!this.running)return;if(a==="left")this.player.move(-1);if(a==="right")this.player.move(1);if(a==="jump")this.player.jump();if(a==="slide")this.player.slideNow();if(a==="boost")this.player.boostNow()}
+ start(){this.resize();this.running=true;this.paused=false;this.over=false;this.last=performance.now();this.d=0;this.score=0;this.runCoins=0;this.combo=1;this.maxCombo=1;this.speed=15;this.spawn=.45;this.coinSpawn=.2;this.powerSpawn=4;this.obs=[];this.coins=[];this.pows=[];this.hit=false;this.reviveUsed=false;this.milestones.clear();this.player.reset();$("gameOverlay").classList.add("hidden");requestAnimationFrame(t=>this.loop(t))}
+ stop(){this.running=false}
+ togglePause(){if(!this.running||this.over)return;this.paused=!this.paused;if(this.paused)this.pauseOverlay();else{$("gameOverlay").classList.add("hidden");this.last=performance.now();requestAnimationFrame(t=>this.loop(t))}}
+ pauseOverlay(){$("overlayCard").innerHTML=`<h2>PAUSED</h2><p>The run is frozen.</p><div class="hero-actions" style="justify-content:center"><button class="primary" onclick="game.togglePause()">RESUME</button><button class="secondary" onclick="game.start()">RESTART</button><button class="secondary" onclick="game.stop();showPage('home')">EXIT</button></div>`;$("gameOverlay").classList.remove("hidden")}
+ loop(t){if(!this.running||this.paused)return;const dt=Math.min(.033,(t-this.last)/1000);this.last=t;this.update(dt);this.draw();requestAnimationFrame(x=>this.loop(x))}
+ update(dt){const diff=S.settings.difficulty,mul=diff==="Easy"?.9:diff==="Hard"?1.14:1;const hero=HEROES[S.selectedHero];this.speed=Math.min(31,(15+this.d*.003)*mul+hero.speed*.35+(this.player.boost>0?10:0));this.d+=this.speed*dt;const scoreMul=1+(S.upgrades["Score Multiplier"]||0)*.12;this.score+=this.speed*dt*10*this.combo*(this.player.double>0?2:1)*scoreMul;this.player.update(dt);this.spawn-=dt;this.coinSpawn-=dt;this.powerSpawn-=dt;const dz=this.speed*dt/100;if(this.spawn<=0){this.obs.push(obstacle(1.1));this.spawn=Math.max(.38,1.02-this.d/5000)*(0.8+Math.random()*.55)}if(this.coinSpawn<=0){for(let i=0;i<3;i++)this.coins.push(coin(1+i*.15,i%3));this.coinSpawn=.42+Math.random()*.42}if(this.powerSpawn<=0){this.pows.push(power(1.05));this.powerSpawn=7+Math.random()*8}for(const a of [this.obs,this.coins,this.pows])for(const o of a)o.z-=dz;if(this.player.magnet>0){for(const q of this.coins)if(!q.collected&&q.z<.8&&Math.abs(q.lane-this.player.lane)<1.1)q.z-=.11}this.collisions();this.obs=this.obs.filter(o=>o.z>-.12&&!o.hit);this.coins=this.coins.filter(o=>o.z>-.12&&!o.collected);this.pows=this.pows.filter(o=>o.z>-.12&&!o.collected);particles.update(dt);this.eventT-=dt;if(this.eventT<=0&&Math.random()<dt*.025)this.event();this.milestone();this.hud()}
+ collisions(){for(const o of this.coins){if(o.collected||o.z<.15||o.z>.72)continue;if(Math.abs(o.lane-this.player.lane)<.48){o.collected=true;this.runCoins++;let amount=50*(1+(S.upgrades["Coin Bonus"]||0)*.15)*(this.player.double>0?2:1);S.coins+=Math.round(amount);S.stats.coins++;this.combo=Math.min(10,this.combo+1);this.maxCombo=Math.max(this.maxCombo,this.combo);this.score+=50*this.combo;particles.burst(this.player.x(),this.player.baseY()-65,10,"coin");beep(760,.04)}}for(const p of this.pows){if(p.collected||p.z<.15||p.z>.7)continue;if(Math.abs(p.lane-this.player.lane)<.48){p.collected=true;this.activate(p.power);S.stats.powerups++;this.combo=Math.min(10,this.combo+1);this.maxCombo=Math.max(this.maxCombo,this.combo)}}for(const o of this.obs){if(o.hit||o.z<.11||o.z>.42)continue;const same=Math.abs(o.lane-this.player.lane)<.42,jump=this.player.y>.68,slide=this.player.slide>0;let safe=false;if(["gate","rock","barrier","crate"].includes(o.type)&&jump)safe=true;if(["laser","spikes"].includes(o.type)&&slide)safe=true;if(same&&!safe){if(this.player.inv>0||this.player.shield>0){this.player.shield=0;this.player.inv=Math.max(this.player.inv,.6);o.hit=true;this.combo=1;particles.burst(this.player.x(),this.player.baseY()-55,22,"hit");beep(180,.1,"sawtooth")}else{this.hit=true;this.end()}}else if(same&&o.z<.25&&!safe){S.stats.obstacles++;S.stats.nearMisses++;this.score+=100*this.combo;this.combo=Math.min(10,this.combo+1);this.maxCombo=Math.max(this.maxCombo,this.combo);toast("NEAR MISS! +100");beep(960,.05)}}}
+ activate(p){const base={SHIELD:7,MAGNET:7,BOOST:4,DOUBLE:7,SUPER:8,MULTI:8,INVINCIBILITY:5}[p];if(p==="SHIELD")this.player.shield=base+(S.upgrades.Shield||0);if(p==="MAGNET")this.player.magnet=base+(S.upgrades.Magnet||0);if(p==="BOOST")this.player.boost=base;if(p==="DOUBLE"||p==="MULTI")this.player.double=base;if(p==="SUPER")this.player.superJump=base;if(p==="INVINCIBILITY")this.player.inv=base;particles.burst(this.player.x(),this.player.baseY()-65,20,"spark");beep(1050,.1);toast(p+" ACTIVE")}
+ event(){const a=["COIN STORM","SPEED SECTION","DRONE SWARM","MEGA COIN LINE","BONUS TUNNEL"];const e=a[Math.floor(Math.random()*a.length)];this.eventT=5;$("hudEvent").textContent=e;if(e==="COIN STORM")for(let i=0;i<14;i++)this.coins.push(coin(1+i*.06,i%3));if(e==="MEGA COIN LINE")for(let i=0;i<18;i++)this.coins.push(coin(1+i*.06,1))}
+ milestone(){for(const m of [100,500,1000,2500,5000,10000])if(this.d>=m&&!this.milestones.has(m)){this.milestones.add(m);toast("MILESTONE! "+m+"m");this.score+=m;beep(620,.1)}}
+ hud(){$("hudScore").textContent=Math.floor(this.score).toLocaleString();$("hudDistance").textContent=Math.floor(this.d)+"m";$("hudCoins").textContent=this.runCoins;$("hudBest").textContent=Math.floor(Math.max(S.bestScore,this.score)).toLocaleString();$("combo").textContent="x"+this.combo;const p=Math.max(this.player.shield,this.player.magnet,this.player.boost,this.player.double,this.player.inv,this.player.superJump);$("powerBar").style.setProperty("--power",Math.min(100,p*12)+"%")}
+ end(){if(this.over)return;this.over=true;this.running=false;S.totalRuns++;S.totalDistance+=this.d;S.bestScore=Math.max(S.bestScore,Math.floor(this.score));S.daily.progress=Math.max(S.daily.progress,this.d);xpAdd(this.d/4+this.runCoins*2);checkAchievements({distance:this.d,maxCombo:this.maxCombo,hit:this.hit});for(const w of WORLDS)if(S.totalDistance>=w.unlock&&!S.worlds?.includes?.(w.name)){/* compatibility */}save();this.gameOver()}
+ gameOver(){const revive=!this.reviveUsed;$("overlayCard").innerHTML=`<h2>RUN OVER</h2><p>${this.hit?"Obstacle collision.":"Run complete."}</p><div class="results"><div class="result"><small>SCORE</small><b>${Math.floor(this.score).toLocaleString()}</b></div><div class="result"><small>DISTANCE</small><b>${Math.floor(this.d)}m</b></div><div class="result"><small>COINS</small><b>${this.runCoins}</b></div><div class="result"><small>LEVEL</small><b>${S.level}</b></div></div><div class="hero-actions" style="justify-content:center">${revive?'<button class="primary" onclick="game.revive()">REVIVE</button>':""}<button class="primary" onclick="game.start()">RUN AGAIN</button><button class="secondary" onclick="game.stop();showPage('home')">HOME</button><button class="secondary" onclick="game.stop();showPage('leaderboard')">LEADERBOARD</button></div>`;$("gameOverlay").classList.remove("hidden")}
+ revive(){if(this.reviveUsed)return;this.reviveUsed=true;this.over=false;this.running=true;this.player.inv=3;this.player.shield=0;this.last=performance.now();$("gameOverlay").classList.add("hidden");requestAnimationFrame(t=>this.loop(t));toast("REVIVED!")}
+ draw(){const c=this.c,W=this.W,H=this.H,w=WORLDS.find(x=>x.name===S.selectedWorld)||WORLDS[0];const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,w.sky[0]);g.addColorStop(.58,w.sky[1]);g.addColorStop(1,"#7768d5");c.fillStyle=g;c.fillRect(0,0,W,H);this.environment(c,W,H);this.road(c,W,H);this.objects(c,W,H);this.player.draw(c);particles.draw(c)}
+ environment(c,W,H){const t=performance.now()/1000;c.globalAlpha=.6;for(let i=0;i<7;i++){const x=(i*200-(t*20)%200),y=H*(.13+(i%3)*.08);c.fillStyle="#fff";c.beginPath();c.ellipse(x,y,68,17,0,0,Math.PI*2);c.ellipse(x+45,y+5,50,14,0,0,Math.PI*2);c.fill()}c.globalAlpha=.2;for(let i=0;i<7;i++){const x=(i*250-(this.d*.12)%250);c.fillStyle="#5a4bb7";c.beginPath();c.moveTo(x,H*.48);c.lineTo(x+70,H*.25-(i%2)*50);c.lineTo(x+150,H*.48);c.fill()}c.globalAlpha=1}
+ road(c,W,H){const hy=H*.42,mid=W/2;const g=c.createLinearGradient(0,hy,0,H);g.addColorStop(0,"#50499d");g.addColorStop(1,"#171c4b");c.fillStyle=g;c.beginPath();c.moveTo(mid-55,hy);c.lineTo(mid+55,hy);c.lineTo(W*.95,H);c.lineTo(W*.05,H);c.closePath();c.fill();for(let i=0;i<4;i++){c.strokeStyle="#80efff66";c.beginPath();c.moveTo(mid+(i-1.5)*28,hy);c.lineTo(W*(.05+i*.30),H);c.stroke()}for(let i=0;i<14;i++){const z=(i/14+(this.d*.018)%1),y=hy+z*z*(H-hy),half=35+z*z*W*.45;c.strokeStyle="#fff2";c.beginPath();c.moveTo(mid-half,y);c.lineTo(mid+half,y);c.stroke()}}
+ objects(c,W,H){const draw=(o,k)=>{if(o.z<=0||o.z>1.3)return;const z=Math.max(.03,o.z),p=Math.pow(1-z,1.8),y=H*.42+p*(H*.78-H*.42),x=W*(.5+(o.lane-1)*.18*p),s=.25+p*1.35;c.save();c.translate(x,y-(k==="coin"?30:38)*s);c.scale(s,s);if(k==="coin"){c.fillStyle="#ffd53c";c.strokeStyle="#fff5";c.lineWidth=3;c.beginPath();c.ellipse(0,0,15,20,Math.sin(performance.now()/180),0,Math.PI*2);c.fill();c.stroke()}else if(k==="power"){c.fillStyle="#ff5fa8";c.shadowBlur=15;c.shadowColor="#ff5fa8";c.beginPath();c.moveTo(0,-22);c.lineTo(17,-4);c.lineTo(0,22);c.lineTo(-17,-4);c.closePath();c.fill();c.shadowBlur=0;c.fillStyle="#fff";c.font="bold 15px system-ui";c.textAlign="center";c.fillText("⚡",0,5)}else{const col=o.type==="laser"?"#ff5e92":o.type==="drone"?"#36dfff":o.type==="spikes"?"#e9f1ff":"#ff8a45";c.fillStyle=col;c.strokeStyle="#18234c";c.lineWidth=3;if(o.type==="drone"){c.beginPath();c.ellipse(0,0,27,12,0,0,Math.PI*2);c.fill();c.fillStyle="#fff";c.beginPath();c.arc(0,0,6,0,Math.PI*2);c.fill()}else if(o.type==="spikes"){for(let i=-2;i<=2;i++){c.beginPath();c.moveTo(i*13,15);c.lineTo(i*13+10,-18);c.lineTo(i*13+20,15);c.fill()}}else{c.beginPath();c.roundRect(-30,-18,60,38,8);c.fill();c.stroke();c.fillStyle="#fff7";c.fillRect(-23,-9,46,6)}}c.restore()};this.obs.forEach(o=>draw(o,"obstacle"));this.coins.forEach(o=>draw(o,"coin"));this.pows.forEach(o=>draw(o,"power"))}
+}
+const game=new Game();
+
+/* ---------- BOOT ---------- */
+applyTheme();renderAll();addEventListener("beforeunload",save);
+</script>
 </body>
 </html>
