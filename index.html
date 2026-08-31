@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#78d8ff">
+<title>SKY DASH 3D</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="bg" class="bg"></div>
+  <header class="topbar">
+    <button class="brand" data-page="home" aria-label="Sky Dash home"><span class="brand-mark">✦</span><span>SKY DASH <b>3D</b></span></button>
+    <div class="top-stats">
+      <span>🪙 <b id="topCoins">0</b></span><span>XP <b id="topLevel">1</b></span>
+    </div>
+    <button id="settingsTop" class="icon-btn" aria-label="Settings">⚙</button>
+  </header>
+
+  <main>
+    <section id="page-home" class="page active">
+      <div class="hero-grid">
+        <div class="hero-copy glass">
+          <span class="eyebrow">FUTURE RUNNER • SEASON 01</span>
+          <h1>CHASE THE<br><em>HORIZON.</em></h1>
+          <p>Dash through floating cities, dodge rogue drones, collect sky energy and become the ultimate runner.</p>
+          <div class="hero-actions">
+            <button class="primary huge" id="playHome">PLAY NOW <span>→</span></button>
+            <button class="secondary" data-page="heroes">HEROES</button>
+          </div>
+          <div class="mini-chips"><span>3 LANES</span><span>∞ DISTANCE</span><span>60 FPS</span></div>
+        </div>
+        <div class="hero-art">
+          <div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
+          <div class="platform"></div>
+          <div class="runner-figure"><div class="backpack"></div><div class="head"><i></i><b></b></div><div class="torso"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div><div class="shoe s1"></div><div class="shoe s2"></div></div>
+          <div class="speed-lines"></div>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="stat-card"><small>BEST SCORE</small><strong id="homeBest">0</strong><span>your peak</span></div>
+        <div class="stat-card"><small>TOTAL DISTANCE</small><strong id="homeDistance">0m</strong><span>all runs</span></div>
+        <div class="stat-card"><small>TOTAL COINS</small><strong id="homeCoins">0</strong><span>banked</span></div>
+        <div class="stat-card"><small>TOTAL RUNS</small><strong id="homeRuns">0</strong><span>attempts</span></div>
+        <div class="daily glass"><div><span class="eyebrow">DAILY CHALLENGE</span><h3 id="dailyTitle">RUN 3000 METERS</h3><p id="dailyProgress">0 / 3000m</p></div><button id="dailyBtn" class="secondary">VIEW</button></div>
+      </div>
+    </section>
+
+    <section id="page-game" class="page game-page">
+      <div class="game-wrap">
+        <canvas id="gameCanvas" aria-label="Sky Dash 3D game"></canvas>
+        <div class="hud">
+          <div class="hud-left"><div class="hud-pill"><small>SCORE</small><b id="hudScore">0</b></div><div class="hud-pill"><small>DISTANCE</small><b id="hudDistance">0m</b></div></div>
+          <div class="hud-center"><div id="hudEvent" class="event-pill">RUN!</div><div id="combo" class="combo">x1</div></div>
+          <div class="hud-right"><div class="hud-pill"><small>COINS</small><b>🪙 <span id="hudCoins">0</span></b></div><div class="hud-pill"><small>BEST</small><b id="hudBest">0</b></div><button id="pauseBtn" class="pause">Ⅱ</button></div>
+          <div id="powerBar" class="power-bar"></div>
+        </div>
+        <div id="gameOverlay" class="game-overlay hidden">
+          <div class="overlay-card glass" id="overlayCard"></div>
+        </div>
+        <div class="mobile-controls">
+          <button data-control="left">←</button><button data-control="jump">↑</button><button data-control="slide">↓</button><button data-control="right">→</button><button data-control="boost">⚡</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-heroes" class="page">
+      <div class="section-head"><div><span class="eyebrow">ROSTER</span><h2>Choose your runner</h2></div><button class="secondary" data-page="home">HOME</button></div>
+      <div id="heroesGrid" class="card-grid"></div>
+    </section>
+    <section id="page-garage" class="page"><div class="section-head"><div><span class="eyebrow">CUSTOMIZE</span><h2>Garage</h2></div></div><div id="garageContent"></div></section>
+    <section id="page-worlds" class="page"><div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Worlds</h2></div></div><div id="worldsGrid" class="card-grid"></div></section>
+    <section id="page-missions" class="page"><div class="section-head"><div><span class="eyebrow">OBJECTIVES</span><h2>Missions</h2></div></div><div id="missionsGrid" class="list-grid"></div></section>
+    <section id="page-shop" class="page"><div class="section-head"><div><span class="eyebrow">MARKET</span><h2>Shop</h2></div><div class="wallet">🪙 <b id="shopCoins">0</b></div></div><div id="shopGrid" class="card-grid"></div></section>
+    <section id="page-upgrades" class="page"><div class="section-head"><div><span class="eyebrow">POWER LAB</span><h2>Upgrades</h2></div></div><div id="upgradesGrid" class="card-grid"></div></section>
+    <section id="page-achievements" class="page"><div class="section-head"><div><span class="eyebrow">TROPHIES</span><h2>Achievements</h2></div></div><div id="achievementsGrid" class="list-grid"></div></section>
+    <section id="page-leaderboard" class="page"><div class="section-head"><div><span class="eyebrow">RANKED</span><h2>Leaderboard</h2></div><div class="tabs"><button class="tab active" data-board="score">SCORE</button><button class="tab" data-board="distance">DISTANCE</button><button class="tab" data-board="coins">COINS</button></div></div><div id="leaderboard" class="leaderboard glass"></div></section>
+    <section id="page-settings" class="page"><div class="section-head"><div><span class="eyebrow">CONTROL CENTER</span><h2>Settings</h2></div></div><div class="settings-card glass" id="settingsPanel"></div></section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button data-page="home">⌂<span>Home</span></button><button data-page="heroes">♙<span>Heroes</span></button><button data-page="worlds">☁<span>Worlds</span></button><button data-page="shop">✦<span>Shop</span></button><button data-page="missions">✓<span>Missions</span></button><button data-page="leaderboard">♛<span>Ranks</span></button>
+  </nav>
+  <div id="toast"></div>
+</div>
+<script src="js/storage.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/player.js"></script>
+<script src="js/enemies.js"></script>
+<script src="js/world.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
